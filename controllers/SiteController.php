@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use yii\web\NotFoundHttpException;
 
 class SiteController extends Controller
 {
@@ -49,6 +50,7 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+        Yii::$app;
         return $this->render('index');
     }
 
@@ -71,7 +73,7 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-
+        new NotFoundHttpException();
         return $this->goHome();
     }
 
